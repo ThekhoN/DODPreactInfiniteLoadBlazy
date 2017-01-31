@@ -1,0 +1,72 @@
+.dodSuperDeal_unit {
+
+  img.offerUnit_img {
+    @include breakpoint(max-width 300px){
+      width: 100% !important;
+      height: auto !important;
+    }
+  }
+
+  .offerUnit_nonImgContWrap {
+    @include breakpoint(max-width 300px){
+      padding-left:0;
+      padding-right:0;
+    }
+  }
+
+  .wrap_saveAmt {
+    text-align: left;
+  }
+
+  .offerUnit_priceTaglineWrap_rel {
+    height: auto;
+    margin-bottom: 8px;
+  }
+
+  .offerUnit_priceWrap {
+    margin-bottom: 6px;
+  }
+
+  .offerUnit_discount {
+    position: static !important;
+    left: 0;
+    top: 0;
+  }
+
+  .offerUnit_sdPlusWrap_abs {
+    left: auto;
+    right: 12px !important;
+    bottom: 12px;
+  }
+
+  .offerUnit_discountWrap {
+    width: 100%;
+  }
+
+}
+
+.dodSuperDealUnit_ev  {
+  &.offerUnits_2_2 {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+
+    @include breakpoint(1024px){
+      margin-top: 10px;
+      border: none!important;
+      //box-shadow: 0 5px 17px 0 rgba(23, 84, 116, 0.18)!important;
+      z-index: 15
+    }
+
+    &:nth-child(2) {
+    //  border-top: 1px solid $separator;
+      @include breakpoint(963px){
+        border-top: 0;
+      }
+    }
+
+    .centeredContX {
+      text-align: left;
+    }
+  }
+
+}
