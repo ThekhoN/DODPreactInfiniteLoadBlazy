@@ -2,6 +2,8 @@ import {isLegit_vendorDTO_item} from './ValidateData'
 
 const querySdPlusPriceSlab = (item) => {
 
+    ////console.log('item: ', item.pogId);
+
     const userDefined_priceSlab = parseInt(item.extraField2);
     const userDefined_sdPlus = item.extraField3;
 
@@ -14,7 +16,6 @@ const querySdPlusPriceSlab = (item) => {
           return true;
         }
         else {
-
           return false;
         }
       }
@@ -25,7 +26,7 @@ const querySdPlusPriceSlab = (item) => {
         }
       }
       else if(userDefined_sdPlus){
-        ////console.log('item pogId:', item.pogId);
+          //console.log('item pogId:', item.pogId);
         if(!sdPlus){
           //console.log('dont show item case3: ', item.pogId);
           return true;

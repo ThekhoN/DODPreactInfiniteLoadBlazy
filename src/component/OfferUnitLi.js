@@ -12,11 +12,18 @@ import querySdPlusPriceSlab from '../module/querySdPlusPriceSlab';
 import {isISObject} from '../module/ValidateData';
 
 const OfferUnitLi = ({item, i}) => {
+  //console.log('item inside OfferUnitLi:', item);
+  //testON
+  /*
+  if(item.pogId){
+    //console.log('all pogIds: ', item.pogId);
+  }
+  */
 
   if(querySdPlusPriceSlab(item)){
+      //console.log('querySdPlusPriceSlab item inside querySdPlusPriceSlab: ', item.pogId);
       return null;
     }
-
 
   if(isISObject(item.commonMinProductDetailsDTO) || item.pogId){
     if(item.commonMinProductDetailsDTO.priceInfo == null){
@@ -24,6 +31,7 @@ const OfferUnitLi = ({item, i}) => {
         return null;
     }
   }
+
 
   const eventId = item.eventId;
   let _classNames = '';

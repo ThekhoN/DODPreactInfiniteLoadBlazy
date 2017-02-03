@@ -1,16 +1,16 @@
-//console.log('live...24 Jan 2017 v1');
+////console.log('live...24 Jan 2017 v1');
   //predefining url because app does not support window.location.href
 
-  //var liveURLx = 'deal-of-the-day';
-  var liveURLx = 'test-preact';
-  var testOfferName = 'test-z666';
+  var liveURLx = 'deal-of-the-day';
+  //var liveURLx = 'test-preact';
+  //var testOfferName = 'test-z666';
   //local
   //var local_testURL = (window.admin && window.admin == 'true' ? '/admin' : '') + "csvData_mobileapi7.json";
   //live
   var preOfferUrl = 'https://mobileapi.snapdeal.com/service/generic/get/getGenericOffer?landingPage=';
   var postOfferUrl = '';
   var predefinedOfferUrl = preOfferUrl + liveURLx + postOfferUrl;
-  var testOfferUrl = preOfferUrl + testOfferName + postOfferUrl;
+  var testOfferUrl = preOfferUrl + liveURLx + postOfferUrl;
 
   //final url to be consumed
   var useFinaOfferlUrl = '';

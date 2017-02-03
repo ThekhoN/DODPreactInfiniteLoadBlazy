@@ -29,16 +29,18 @@ import initSocialShareModule from '../module/initSocialShareModule'
 
 //global
 const preUrl = queryUrl();
-//console.log('preUrl: ', preUrl);
+//////console.log('preUrl: ', preUrl);
 //const url = 'https://mobileapi.snapdeal.com/service/generic/get/getGenericOffer?landingPage=deal-of-the-day&start=0&count=150';
-const eventIds=['bankOfferBannerX99', 'superDod', 'DealofDayOffers', 'BlockbusterDeals'];
+//const eventIds=['bankOfferBannerX99', 'superDod', 'DealofDayOffers', 'BlockbusterDeals'];
+const eventIds=['bankOfferBannerX99', 'superDod', 'valentinesDeals', 'DealofDayOffers', 'BlockbusterDeals'];
 
 
 // +++++ getNextReqUrl +++++ //
 const firstStart = 0;
-const count = 30;
+const count = 31;//keep it odd
 let nextStart = count + 1;
 let firstReqUrl = `${preUrl}&start=${firstStart}&count=${count}`;
+////console.log('firstReqUrl: ', firstReqUrl);
 //nextUrl = `https://mobileapi.snapdeal.com/service/generic/get/getGenericOffer?landingPage=deal-of-the-day&start=${countStart+10}&count=${incrementCount+10}`;
 const getNextReqUrl = () => {
   const nextUrl = `${preUrl}&start=${nextStart}&count=${count}`;
@@ -70,9 +72,9 @@ class MainOfferContainerInfiniteScroller extends Component {
     this._renderContent = this._renderContent.bind(this)
   }
   _loadMoreInfiniteContent(){
-    //console.log('has entered the waypoint. . .')
+    //////console.log('has entered the waypoint. . .')
     if(nextStart > this.state.countLimit){
-      //console.info('countLimit exceeded, return...');
+      //console.log('countLimit exceeded, return...');
       return;
     }
     //else fetch more
@@ -80,7 +82,7 @@ class MainOfferContainerInfiniteScroller extends Component {
       isLoading: true
     })
     let nextUrl = getNextReqUrl();
-    //console.log('nextUrl: ', nextUrl);
+    //////console.log('nextUrl: ', nextUrl);
     //  +++++  rawXHR +++++ //
       /*
         XHR_req(nextUrl, function (response) {
@@ -121,12 +123,27 @@ class MainOfferContainerInfiniteScroller extends Component {
     }
   }
   _renderContent(){
-    //console.log('running _renderContent. . .WTF');
+    //////console.log('running _renderContent. . .WTF');
+    ////console.log('changed filters DealofDayOffers weakened. . .');
+    const OfferList = this.state.data.filter(offer=>{
+    //console.log('offer inside _renderContent:', offer);
+      return (offer.eventId === 'DealofDayOffers')
+      //DealofDayOffers
+      //DealofDayOffers
+    })
+    .map((thisOffer, i) => (<OfferUnitLi item={thisOffer} i={i}/>))
+
+
+    /*
     const OfferList = this.state.data.filter(offer=>(
       offer.eventId === 'DealofDayOffers'))
       .map((thisOffer, i) => (<OfferUnitLi item={thisOffer} i={i}/>))
+      */
 
       //return (OfferList)
+
+      //return (<span>{OfferList}</span>)
+
 
     return (<CSSTransitionGroup
               transitionName="slide"
@@ -137,21 +154,24 @@ class MainOfferContainerInfiniteScroller extends Component {
 
 
 
+
   }
   componentDidMount(){
 
     // +++++ UC Browser +++++ //
+    //testOFF
     //const isUCBrowser = true;
     const isUCBrowser = navigator.userAgent.indexOf('UCBrowser') > 0;
     if(isUCBrowser){
       this.setState({
         isUCBrowser: true
       })
-      firstReqUrl = 'https://mobileapi.snapdeal.com/service/generic/get/getGenericOffer?landingPage=deal-of-the-day&start=0&count=150';
+      firstReqUrl = 'https://mobileapi.snapdeal.com/service/generic/get/getGenericOffer?landingPage=test-preact&start=0&count=250';
       //  +++++ rawXHR +++++ //
       XHR_req(firstReqUrl, function (response) {
-          //console.log('full req using xhr, UCBrowser true. . .url: ', firstReqUrl);
+          ////console.log('full req using xhr, UCBrowser true. . .url: ', firstReqUrl);
           const _data = response.genericOfferItems;
+          ////console.log('UCBrowser _data: ', _data);
           this.setState({
               data: _data,
               showPlaceholder: false
@@ -181,7 +201,7 @@ class MainOfferContainerInfiniteScroller extends Component {
       }
 
 
-      //console.log('firstReqUrl: ', firstReqUrl);
+      //////console.log('firstReqUrl: ', firstReqUrl);
 
 
 
@@ -238,7 +258,7 @@ class MainOfferContainerInfiniteScroller extends Component {
                   </SectionX>
                 )
               }
-              else {
+              else if(eventId.indexOf('DealofDayOffers') > -1){
                 return (
                   <SectionX id="DealofDayOffers" eventId="DealofDayOffers">
                     <CaptionWrapper caption={captions[eventId]} eventId={eventId} stylingClass="gradient_greenToBlue"/>
