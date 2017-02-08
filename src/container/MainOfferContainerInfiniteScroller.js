@@ -28,8 +28,9 @@ import XHR_req from '../module/XHR_req'
 import initSocialShareModule from '../module/initSocialShareModule'
 
 //global
+//testON
 const preUrl = queryUrl();
-//////console.log('preUrl: ', preUrl);
+
 //const url = 'https://mobileapi.snapdeal.com/service/generic/get/getGenericOffer?landingPage=deal-of-the-day&start=0&count=150';
 //const eventIds=['bankOfferBannerX99', 'superDod', 'DealofDayOffers', 'BlockbusterDeals'];
 const eventIds=['bankOfferBannerX99', 'superDod', 'valentinesDeals', 'DealofDayOffers', 'BlockbusterDeals'];
@@ -37,14 +38,14 @@ const eventIds=['bankOfferBannerX99', 'superDod', 'valentinesDeals', 'DealofDayO
 
 // +++++ getNextReqUrl +++++ //
 const firstStart = 0;
-const count = 31;//keep it odd
-let nextStart = count + 1;
+const count = 31;//important keep it odd otherwise misses items ~ research
+let nextStart = count; //prev count + 1;
 let firstReqUrl = `${preUrl}&start=${firstStart}&count=${count}`;
-////console.log('firstReqUrl: ', firstReqUrl);
+//console.log('firstReqUrl: ', firstReqUrl);
 //nextUrl = `https://mobileapi.snapdeal.com/service/generic/get/getGenericOffer?landingPage=deal-of-the-day&start=${countStart+10}&count=${incrementCount+10}`;
 const getNextReqUrl = () => {
   const nextUrl = `${preUrl}&start=${nextStart}&count=${count}`;
-  nextStart = nextStart + count + 1;
+  nextStart = nextStart + count; //prev nextStart + count + 1;
   return nextUrl;
 }
 // +++++ /getNextReqUrl +++++ //
@@ -82,7 +83,7 @@ class MainOfferContainerInfiniteScroller extends Component {
       isLoading: true
     })
     let nextUrl = getNextReqUrl();
-    //////console.log('nextUrl: ', nextUrl);
+    //console.info('nextUrl: ', nextUrl);
     //  +++++  rawXHR +++++ //
       /*
         XHR_req(nextUrl, function (response) {
